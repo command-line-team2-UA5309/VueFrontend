@@ -1,5 +1,5 @@
 <template>
-  <div class="auth-container">
+  <div>
     <h2>Create an account</h2>
     <form @submit.prevent="handleRegister">
       <input v-model="form.username" type="text" placeholder="Username" required />

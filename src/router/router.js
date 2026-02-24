@@ -1,5 +1,4 @@
 import { createWebHistory, createRouter } from 'vue-router'
-//import Quote from '@/pages/Quote.vue'
 import { useAuthStore } from '@/stores/auth'
 import HomeView from '@/pages/HomeView.vue'
 import LoginView from '@/pages/LoginView.vue'
@@ -16,16 +15,15 @@ export const router = createRouter({
   routes,
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, from) => {
   const authStore = useAuthStore()
-  
+
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-    next({ name: 'login' })
-  } else if ((to.name === 'login' || to.name === 'register') && authStore.isAuthenticated) {
-    next({ name: 'home' })
-  } else {
-    next()
+    return { name: 'login' }
   }
+  if ((to.name === 'login' || to.name === 'register') && authStore.isAuthenticated) {
+    return { name: 'home' }
+  } 
 })
 
 export default router
