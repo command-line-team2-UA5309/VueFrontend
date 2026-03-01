@@ -1,7 +1,11 @@
+// @ts-nocheck
 import axios from 'axios'
 
+const host = import.meta.env.VITE_API_HOST
+const port = import.meta.env.VITE_API_PORT
+
 const api = axios.create({
-  baseURL: 'http://localhost:8000/api/',
+  baseURL: `http://${host}:${port}/api/`
 })
 
 api.interceptors.request.use((config) => {
