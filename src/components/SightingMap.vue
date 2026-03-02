@@ -1,6 +1,21 @@
 <template>
   <div class="map-container">
-    <div style="height: 500px; width: 100%; border-radius: 8px; overflow: hidden;">
+    <div v-if="draftLocation" class="sighting-form">
+      <h3>Create New Sighting</h3>
+      <p>Coordinates: {{ draftLocation.lat.toFixed(4) }}, {{ draftLocation.lng.toFixed(4) }}</p>
+      
+      <form @submit.prevent="submitSighting">
+        <input v-model="form.title" type="text" placeholder="Title" required />
+        <input v-model="form.type" type="text" placeholder="Type" required />
+        <textarea v-model="form.description" placeholder="Description"></textarea>
+        <input type="file" @change="handleFileUpload" accept="image/*" />
+
+        <button type="submit">Save Sighting</button>
+        <button type="button" @click="cancelDraft">Cancel</button>
+      </form>
+      <p v-if="errorMsg" class="error">{{ errorMsg }}</p>
+    </div>
+    <div class="map-wrapper">
       <l-map 
         ref="map" 
         v-model:zoom="zoom" 
@@ -42,21 +57,6 @@
       </l-map>
     </div>
 
-    <div v-if="draftLocation" class="sighting-form">
-      <h3>Create New Sighting</h3>
-      <p>Coordinates: {{ draftLocation.lat.toFixed(4) }}, {{ draftLocation.lng.toFixed(4) }}</p>
-      
-      <form @submit.prevent="submitSighting">
-        <input v-model="form.title" type="text" placeholder="Title" required />
-        <input v-model="form.type" type="text" placeholder="Type" required />
-        <textarea v-model="form.description" placeholder="Description"></textarea>
-        <input type="file" @change="handleFileUpload" accept="image/*" />
-
-        <button type="submit">Save Sighting</button>
-        <button type="button" @click="cancelDraft">Cancel</button>
-      </form>
-      <p v-if="errorMsg" class="error">{{ errorMsg }}</p>
-    </div>
   </div>
 </template>
 
@@ -166,10 +166,13 @@ const confirmSighting = async (id) => {
   background: #f9f9f9;
 }
 .sighting-form input, .sighting-form textarea {
+  font-family: Arial;
+  font-size: 0.85rem;
   display: block;
   width: 100%;
   margin-bottom: 10px;
   padding: 8px;
+  box-sizing: border-box;
 }
 .error {
   color: red;
