@@ -151,32 +151,88 @@ const confirmSighting = async (id) => {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin-top: 20px;
+  margin-top: 10px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
 }
+
+.map-container > div:first-child {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  border: 4px solid white;
+}
+
 .map-wrapper {
   height: 500px; 
   width: 100%; 
   border-radius: 8px; 
   overflow: hidden;
 }
+
 .sighting-form {
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background: #f9f9f9;
+  padding: 25px;
+  border: none;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
+
+.sighting-form h3 {
+  margin-top: 0;
+  color: #2e7d32;
+  border-bottom: 2px solid #c8e6c9;
+  padding-bottom: 10px;
+}
+
+.sighting-form p {
+  color: #555;
+  font-size: 0.9rem;
+}
+
 .sighting-form input, .sighting-form textarea {
-  font-family: Arial;
-  font-size: 0.85rem;
   display: block;
   width: 100%;
-  margin-bottom: 10px;
-  padding: 8px;
+  margin-bottom: 15px;
+  padding: 12px;
   box-sizing: border-box;
+  font-family: inherit; 
+  font-size: 1rem;
+  border: 1px solid #a5d6a7;
+  border-radius: 6px;
+  background-color: #fcfcfc;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
+
+.sighting-form input:focus, .sighting-form textarea:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+.sighting-form button {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-right: 10px;
+  transition: opacity 0.2s;
+}
+
+.sighting-form button[type="button"] {
+  background-color: #757575;
+}
+
+.sighting-form button:hover {
+  opacity: 0.85;
+}
+
 .error {
-  color: red;
+  color: #d32f2f;
   margin-top: 10px;
+  font-weight: bold;
 }
 
 .popup-photo-container {
@@ -187,9 +243,19 @@ const confirmSighting = async (id) => {
 .popup-photo {
   max-width: 150px;
   border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .confirm-btn {
   margin-top: 5px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.confirm-btn:hover {
+  background-color: #388e3c;
 }
 </style>
