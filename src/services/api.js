@@ -39,7 +39,7 @@ const tokenResponseInterceptor = async (error) => {
     if (refreshToken) {
       try {
         // use refresh token to get a new access token
-        const refreshResponse = await axios.post(`http://${host}:${authPort}/api/token/refresh/`, {
+        const refreshResponse = await axios.post(`http://${host}:${port}/api/token/refresh/`, {
           refresh: refreshToken
         })
 
