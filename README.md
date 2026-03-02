@@ -26,3 +26,15 @@ This will create a production-ready build of your app in the project's ./dist di
 ```sh
 npm run build
 ```
+
+## To create a Docker image
+
+```sh
+docker build . -t vue-app
+```
+
+## To run the container
+
+```sh
+docker run -d -p 7000:80 vue-app:latest
+```
