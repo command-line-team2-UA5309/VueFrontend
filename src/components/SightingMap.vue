@@ -138,7 +138,6 @@ const cancelDraft = () => {
 const confirmSighting = async (id) => {
   try {
     await mapApi.post(`sighting/${id}/confirm/`)
-    alert("Sighting confirmed successfully!")
     await fetchSightings() 
   } catch (error) {
     alert(error.response?.data?.detail || "Failed to confirm sighting.")
