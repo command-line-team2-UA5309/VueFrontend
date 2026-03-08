@@ -5,6 +5,7 @@
       <form @submit.prevent="handleLogin">
         <input v-model="credentials.username" type="text" placeholder="Username" required />
         <input v-model="credentials.password" type="password" placeholder="Password" required />
+        <input v-model="credentials.daycode" type="text" placeholder="Daily Code" required />
         <button type="submit">Log in</button>
       </form>
       <p v-if="errorMsg" class="error">{{ errorMsg }}</p>
@@ -23,7 +24,7 @@ import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
 const authStore = useAuthStore()
-const credentials = ref({ username: '', password: '' })
+const credentials = ref({ username: '', password: '', daycode: '' })
 const errorMsg = ref('')
 
 const handleLogin = async () => {
@@ -31,7 +32,7 @@ const handleLogin = async () => {
     await authStore.login(credentials.value)
     router.push({ name: 'home' })
   } catch (error) {
-    errorMsg.value = "Wrong username or password"
+    errorMsg.value = "Wrong username, password or daily code"
   }
 }
 </script>
