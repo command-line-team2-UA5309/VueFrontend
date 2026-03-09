@@ -2,7 +2,7 @@
   <div class="map-container">
     <div v-if="draftLocation" class="sighting-form">
       <h3>Create New Sighting</h3>
-      <p>Coordinates: {{ draftLocation.lat.toFixed(4) }}, {{ draftLocation.lng.toFixed(4) }}</p>
+      <p>Coordinates: {{ draftLocation.lat.toFixed(6) }}, {{ draftLocation.lng.toFixed(6) }}</p>
       
       <form @submit.prevent="submitSighting">
         <input v-model="form.title" type="text" placeholder="Title" required />
@@ -24,10 +24,11 @@
         @click="handleMapClick"
       >
         <l-tile-layer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          url="https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.png"
           layer-type="base"
-          name="OpenStreetMap"
-          attribution="&copy; OpenStreetMap contributors"
+          name="Stamen Terrain"
+          :max-zoom="20"
+          attribution='&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>'
         ></l-tile-layer>
 
         <l-marker 
@@ -70,8 +71,8 @@ import { useAuthStore } from '@/stores/auth'
 
 const authStore = useAuthStore()
 
-const zoom = ref(6)
-const center = ref([50.4014305,30.2023616])
+const zoom = ref(10)
+const center = ref([50.4454601,30.5236796]) // Kyiv coordinates
 const sightings = ref([])
 const draftLocation = ref(null)
 
@@ -137,7 +138,6 @@ const cancelDraft = () => {
 const confirmSighting = async (id) => {
   try {
     await mapApi.post(`sighting/${id}/confirm/`)
-    alert("Sighting confirmed successfully!")
     await fetchSightings() 
   } catch (error) {
     alert(error.response?.data?.detail || "Failed to confirm sighting.")
